@@ -25,9 +25,9 @@ class Create_users_table {
                     'auto_increment' => TRUE,
                     'null'           => FALSE,
                 ],
-                'username' => [
+                'full_name' => [
                     'type'       => 'VARCHAR',
-                    'constraint' => 100,
+                    'constraint' => 255,
                     'null'       => FALSE,
                 ],
                 'email' => [
@@ -43,16 +43,39 @@ class Create_users_table {
                 ],
                 'role' => [
                     'type'       => 'ENUM',
-                    'constraint' => "'admin','moderator','user'",
+                    'constraint' => "'admin','instructor','staff','trainee'",
                     'null'       => FALSE,
-                    'default'    => 'user',
+                    'default'    => 'trainee',
                 ],
-                'is_active' => [
-                    'type'       => 'TINYINT',
-                    'constraint' => 1,
-                    'unsigned'   => TRUE,
+                'status' => [
+                    'type'       => 'ENUM',
+                    'constraint' => "'active','inactive','suspended'",
                     'null'       => FALSE,
-                    'default'    => 1,
+                    'default'    => 'active',
+                ],
+                'qr_code' => [
+                    'type'       => 'VARCHAR',
+                    'constraint' => 255,
+                    'null'       => TRUE,
+                ],
+                'phone' => [
+                    'type'       => 'VARCHAR',
+                    'constraint' => 20,
+                    'null'       => TRUE,
+                ],
+                'address' => [
+                    'type'       => 'TEXT',
+                    'null'       => TRUE,
+                ],
+                'guardian_name' => [
+                    'type'       => 'VARCHAR',
+                    'constraint' => 255,
+                    'null'       => TRUE,
+                ],
+                'guardian_contact' => [
+                    'type'       => 'VARCHAR',
+                    'constraint' => 20,
+                    'null'       => TRUE,
                 ],
                 'created_at' => [
                     'type'    => 'DATETIME',
@@ -66,9 +89,9 @@ class Create_users_table {
                 ],
             ])
             ->add_key('id', primary: TRUE)
-            ->add_key('username', unique: TRUE, name: 'username_unique')
             ->add_key('email', name: 'email_idx')
             ->add_key('role', name: 'role_idx')
+            ->add_key('qr_code', name: 'qr_code_idx')
             ->create_table('users');
     }
 

@@ -44,4 +44,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 */
 /** @var object $router **/
 
-$router->get('/', 'Welcome::index');
+$router->get('/', 'SmartTrack::index');
+$router->get('/smarttrack', 'SmartTrack::index');
+$router->get('/login', 'Auth::login');
+$router->post('/login', 'Auth::login');
+$router->get('/register', 'Auth::register');
+$router->post('/register', 'Auth::register');
+$router->get('/logout', 'Auth::logout');
+
+// Role-based dashboards
+$router->get('/admin/dashboard', 'Admin::dashboard');
+$router->get('/instructor/dashboard', 'Instructor::dashboard');
+$router->get('/trainee/dashboard', 'Trainee::dashboard');
+$router->get('/staff/dashboard', 'Staff::dashboard');
